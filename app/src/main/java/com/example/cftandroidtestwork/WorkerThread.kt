@@ -4,7 +4,10 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
 import android.os.Message
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.cftandroidtestwork.data.database.RoomRepository
+import com.example.cftandroidtestwork.data.database.entity.CurrencyRoomItem
 import com.example.cftandroidtestwork.data.internet.CurrencyInternetRepository
 import com.example.cftandroidtestwork.data.json.CurrentCurrency
 import com.example.cftandroidtestwork.data.json.CurrentCurrencyWithListValuteAndName
@@ -17,6 +20,7 @@ private const val TAG = "BACKGROUND Thread"
 private const val MESSAGE_DOWNLOAD = 0
 class WorkerThread(private val liveData: MutableLiveData<CurrentCurrencyWithListValuteAndName?>): HandlerThread(TAG) {
     private val currencyInternetRepository = CurrencyInternetRepository.get()
+    private val roomRepository = RoomRepository.get()
     init {
         start()
         looper
@@ -43,6 +47,23 @@ class WorkerThread(private val liveData: MutableLiveData<CurrentCurrencyWithList
     }
 
     fun handleRequest(url: String){
+        val item = roomRepository.getItem()
+        if (item == null || item.valutes == null) loadInternet(url)
+        else{
+            Log.d("TAG", "ROOM")
+            val result = CurrentCurrencyWithListValuteAndName()
+            result.apply {
+                Date = item.Date
+                PreviousDate = item.PreviousDate
+                PreviousURL = item.PreviousURL
+                Timestamp = item.Timestamp
+                valutes = item.valutes
+            }
+            liveData.postValue(result)
+        }
+    }
+    fun loadInternet(url: String){
+        Log.d("TAG", "INTERNET")
         val data:String? = try {
             currencyInternetRepository.getRequestFromUrl(url)
         } catch (e: Exception){
@@ -68,6 +89,15 @@ class WorkerThread(private val liveData: MutableLiveData<CurrentCurrencyWithList
                 }
             }
         }
+        val saveResult = CurrencyRoomItem()
+        saveResult.apply {
+            Date = result.Date
+            PreviousDate = result.PreviousDate
+            PreviousURL = result.PreviousURL
+            Timestamp = result.Timestamp
+            valutes = result.valutes
+        }
+        roomRepository.setItem(saveResult)
         liveData.postValue(result)
     }
 }

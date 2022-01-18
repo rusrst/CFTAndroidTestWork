@@ -19,6 +19,7 @@ data class Valute(@SerialName("ID") val id: String? = null,
                   @SerialName("Value") val value: Double? = null,
                   @SerialName("Previous") val previous: Double? = null)
 
+@Serializable
 data class CurrentCurrencyWithListValuteAndName(
     var Date: String? = null,
     var PreviousDate: String? = null,
@@ -26,4 +27,5 @@ data class CurrentCurrencyWithListValuteAndName(
     var Timestamp: String? = null,
     var valutes: List<ValuteAndName>? = null)
 
+@Serializable
 data class ValuteAndName(var name: String, var valute: Valute)
