@@ -48,6 +48,7 @@ class Converter: Fragment(){
                 binding.textViewRub.visibility = View.GONE
                 binding.spinnerVal.visibility = View.GONE
                 binding.result.visibility = View.GONE
+                binding.textViewReload.visibility = View.GONE
             }
             else{
                 binding.errorConverter.visibility = View.GONE
@@ -60,6 +61,8 @@ class Converter: Fragment(){
                     viewModel.listNamed.add(it.name)
                 }
                 adapter?.notifyDataSetChanged()
+                binding.textViewReload.visibility = View.VISIBLE
+                binding.textViewReload.text = "Данные от: " +  viewModel.data.value?.Date
             }
         }
 

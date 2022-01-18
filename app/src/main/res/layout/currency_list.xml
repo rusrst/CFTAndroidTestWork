@@ -49,4 +49,14 @@
             android:text="@string/try_again"
             android:id="@+id/tryAgainCurrencyList"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ImageButton
+        android:id="@+id/reloadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="35dp"
+        android:minHeight="48dp"
+        android:src="@android:drawable/ic_popup_sync" />
+
 </FrameLayout>

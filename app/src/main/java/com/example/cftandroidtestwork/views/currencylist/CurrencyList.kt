@@ -27,7 +27,7 @@ class CurrencyList: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (viewModel.data.value == null){
             binding.progressBarCurrencyList.visibility = View.VISIBLE
-            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js")
+            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 0)
         }
         adapter = CurrencyListAdapter()
         val layoutManager = LinearLayoutManager(requireContext())
@@ -53,7 +53,11 @@ class CurrencyList: Fragment() {
         }
         binding.tryAgainCurrencyList.setOnClickListener{
             viewModel.data.value = null
-            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js")
+            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 0)
+        }
+        binding.reloadButton.setOnClickListener{
+            viewModel.data.value = null
+            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 1)
         }
     }
 }

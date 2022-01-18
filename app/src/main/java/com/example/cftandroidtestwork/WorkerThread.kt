@@ -18,6 +18,7 @@ import kotlinx.serialization.json.Json
 
 private const val TAG = "BACKGROUND Thread"
 private const val MESSAGE_DOWNLOAD = 0
+private const val MESSAGE_DOWNLOAD_FROM_INTERNET = 1
 class WorkerThread(private val liveData: MutableLiveData<CurrentCurrencyWithListValuteAndName?>): HandlerThread(TAG) {
     private val currencyInternetRepository = CurrencyInternetRepository.get()
     private val roomRepository = RoomRepository.get()
@@ -36,14 +37,20 @@ class WorkerThread(private val liveData: MutableLiveData<CurrentCurrencyWithList
             override fun handleMessage(msg: Message) {
                 when (msg.what){
                     MESSAGE_DOWNLOAD -> handleRequest(msg.obj as String)
+                    MESSAGE_DOWNLOAD_FROM_INTERNET -> loadInternet(msg.obj as String)
                 }
             }
         }
     }
 
-    fun returnData( url: String){
-        mHandler.obtainMessage(MESSAGE_DOWNLOAD,0, 0,  url)
-            .sendToTarget()
+    fun returnData( url: String, id: Int){
+        when (id){
+            0 -> mHandler.obtainMessage(MESSAGE_DOWNLOAD,0, 0,  url)
+                .sendToTarget()
+            1 -> mHandler.obtainMessage(MESSAGE_DOWNLOAD_FROM_INTERNET,0, 0,  url)
+                .sendToTarget()
+        }
+
     }
 
     fun handleRequest(url: String){
@@ -97,7 +104,9 @@ class WorkerThread(private val liveData: MutableLiveData<CurrentCurrencyWithList
             Timestamp = result.Timestamp
             valutes = result.valutes
         }
-        roomRepository.setItem(saveResult)
+        if (saveResult.valutes != null){
+            roomRepository.setItem(saveResult)
+        }
         liveData.postValue(result)
     }
 }
