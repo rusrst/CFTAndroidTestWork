@@ -55,6 +55,7 @@ class Converter: Fragment(){
                 binding.textViewRub.visibility = View.VISIBLE
                 binding.spinnerVal.visibility = View.VISIBLE
                 binding.result.visibility = View.VISIBLE
+                viewModel.listNamed.clear()
                 currentcurrencywithlistvalueandname.valutes!!.forEach {
                     viewModel.listNamed.add(it.name)
                 }
@@ -77,19 +78,34 @@ class Converter: Fragment(){
                 return
             }
             else{
+                var count = 0
                 p0?.forEach {
                     if(it in charArray){
                         binding.numRub.text = SpannableStringBuilder("0")
                         binding.numRub.setSelection(1)
                         return
                     }
+                    else if (it == '.' || it == ','){
+                        count++
+                    }
                 }
+                if (count > 1){
+                        binding.numRub.text = SpannableStringBuilder("0")
+                        binding.numRub.setSelection(1)
+                        return
+                    }
                 var multiplier: Double
                 if (viewModel.currentVal == null || viewModel.currentVal?.value == null || viewModel.currentVal?.nominal == null) multiplier = 1.0
                 else multiplier = viewModel.currentVal?.value!! /viewModel.currentVal?.nominal!!
                 binding.multiplier.text = multiplier.toString()
-                val data = p0.toString().toDouble() * multiplier
-                binding.result.text = data.toString()
+                val data = p0.toString().replace(',', '.').toDouble() * multiplier
+                val dataStart = (data.toString().substringBefore('.')).plus('.')
+                val dataEnd = try{
+                        (data.toString().substringAfter('.').substring(0, 4))}
+                catch (e: Exception) {
+                    "0000"
+                }
+                binding.result.text = dataStart+dataEnd
             }
         }
     }
@@ -100,10 +116,7 @@ class Converter: Fragment(){
             viewModel.currentVal = viewModel.data.value!!.valutes!![p2].valute
             binding.numRub.text = binding.numRub.text
         }
-
         override fun onNothingSelected(p0: AdapterView<*>?) {
-
         }
-
     }
 }
