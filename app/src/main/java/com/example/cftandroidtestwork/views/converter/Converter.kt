@@ -52,6 +52,7 @@ class Converter: Fragment(), HasCustomTitle{
                 binding.spinnerVal.visibility = View.GONE
                 binding.result.visibility = View.GONE
                 binding.textViewReload.visibility = View.GONE
+                binding.multiplier.visibility = View.GONE
             }
             else{
                 (requireActivity() as Navigator).updateUi(0)
@@ -67,6 +68,7 @@ class Converter: Fragment(), HasCustomTitle{
                 adapter?.notifyDataSetChanged()
                 binding.textViewReload.visibility = View.VISIBLE
                 binding.textViewReload.text = "Данные от: " +  viewModel.data.value?.Date
+                binding.multiplier.visibility = View.VISIBLE
             }
         }
 
@@ -108,7 +110,16 @@ class Converter: Fragment(), HasCustomTitle{
                 val data = p0.toString().replace(',', '.').toDouble() * multiplier
                 val dataStart = (data.toString().substringBefore('.')).plus('.')
                 val dataEnd = try{
-                        (data.toString().substringAfter('.').substring(0, 4))}
+                        var temp = (data.toString().substringAfter('.'))
+                    if (temp.length >= 4) {
+                        temp = temp.substring(0, 4)
+                        temp                    }
+                    else {
+                        val tempSize = temp.length
+                        temp = temp.substring(0, tempSize)
+                        temp
+                    }
+                }
                 catch (e: Exception) {
                     "0000"
                 }
