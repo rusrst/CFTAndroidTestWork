@@ -2,4 +2,6 @@
     <string name="app_name">CFT Android Test Work</string>
     <string name="error">ERROR</string>
     <string name="try_again">TRY AGAIN</string>
+    <string name="errrorNoData">ERRROR, Данные отсутсвуют</string>
+    <string name="rub">RUB</string>
 </resources>

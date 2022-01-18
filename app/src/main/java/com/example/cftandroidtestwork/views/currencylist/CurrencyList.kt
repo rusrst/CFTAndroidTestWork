@@ -1,13 +1,12 @@
-package com.example.cftandroidtestwork.views
+package com.example.cftandroidtestwork.views.currencylist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelLazy
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cftandroidtestwork.WorkerThread
 import com.example.cftandroidtestwork.databinding.CurrencyListBinding
@@ -15,7 +14,7 @@ import com.example.cftandroidtestwork.databinding.CurrencyListBinding
 class CurrencyList: Fragment() {
     private lateinit var adapter: CurrencyListAdapter
     private lateinit var binding: CurrencyListBinding
-    private val viewModel: CurrencyViewModel by viewModels()
+    private val viewModel: CurrencyViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

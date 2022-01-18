@@ -1,4 +1,4 @@
-package com.example.cftandroidtestwork.views
+package com.example.cftandroidtestwork.views.currencylist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

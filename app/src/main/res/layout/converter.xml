@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/numRub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:inputType="number"
+        android:minWidth="120dp"
+        android:minHeight="35dp"
+        android:text="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="35dp"
+        android:minWidth="120dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/numRub"
+        app:layout_constraintStart_toStartOf="@+id/numRub"
+        app:layout_constraintTop_toBottomOf="@+id/numRub"
+        android:text="@string/rub"
+        android:gravity="center"/>
+
+    <Spinner
+        android:id="@+id/spinnerVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:minWidth="120dp"
+        android:minHeight="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/numRub"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/multiplier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+
+        android:minWidth="120dp"
+        android:minHeight="35dp"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerVal"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerVal" />
+
+    <TextView
+        android:id="@+id/errorConverter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="120dp"
+        android:minHeight="35dp"
+        android:text="@string/errrorNoData"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:minHeight="35dp"
+        android:minWidth="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRub"
+        android:textSize="24sp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
