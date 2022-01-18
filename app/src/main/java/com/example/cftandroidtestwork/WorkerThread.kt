@@ -57,7 +57,6 @@ class WorkerThread(private val liveData: MutableLiveData<CurrentCurrencyWithList
         val item = roomRepository.getItem()
         if (item == null || item.valutes == null) loadInternet(url)
         else{
-            Log.d("TAG", "ROOM")
             val result = CurrentCurrencyWithListValuteAndName()
             result.apply {
                 Date = item.Date
@@ -70,7 +69,6 @@ class WorkerThread(private val liveData: MutableLiveData<CurrentCurrencyWithList
         }
     }
     fun loadInternet(url: String){
-        Log.d("TAG", "INTERNET")
         val data:String? = try {
             currencyInternetRepository.getRequestFromUrl(url)
         } catch (e: Exception){
