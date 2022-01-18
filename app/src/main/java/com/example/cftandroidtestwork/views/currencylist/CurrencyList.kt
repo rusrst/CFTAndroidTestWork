@@ -9,9 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cftandroidtestwork.WorkerThread
+import com.example.cftandroidtestwork.data.contract.HasCustomTitle
+import com.example.cftandroidtestwork.data.contract.Navigator
 import com.example.cftandroidtestwork.databinding.CurrencyListBinding
 
-class CurrencyList: Fragment() {
+class CurrencyList: Fragment(), HasCustomTitle {
     private lateinit var adapter: CurrencyListAdapter
     private lateinit var binding: CurrencyListBinding
     private val viewModel: CurrencyViewModel by activityViewModels()
@@ -35,17 +37,20 @@ class CurrencyList: Fragment() {
         binding.recyclerViewCurrencyList.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner){
             if (it?.Date != null) {
+                (requireActivity() as Navigator).updateUi(0)
                 binding.progressBarCurrencyList.visibility = View.GONE
                 binding.recyclerViewCurrencyList.visibility = View.VISIBLE
                 binding.errorCurrencyList.visibility = View.GONE
                 adapter.items = it.valutes ?: emptyList()
             }
             else if(it != null){
+                (requireActivity() as Navigator).updateUi(0)
                 binding.progressBarCurrencyList.visibility = View.GONE
                 binding.recyclerViewCurrencyList.visibility = View.GONE
                 binding.errorCurrencyList.visibility = View.VISIBLE
             }
             else{
+                (requireActivity() as Navigator).updateUi(0)
                 binding.progressBarCurrencyList.visibility = View.VISIBLE
                 binding.recyclerViewCurrencyList.visibility = View.GONE
                 binding.errorCurrencyList.visibility = View.GONE
@@ -59,5 +64,15 @@ class CurrencyList: Fragment() {
             viewModel.data.value = null
             viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 1)
         }
+    }
+
+    override fun onResume() {
+        (requireActivity() as Navigator).updateUi(0)
+        super.onResume()
+    }
+
+    override fun getTitle(): String {
+        if (viewModel.data.value?.Date != null)  return viewModel.data.value?.Date!!
+        return "Данные пока не загружены"
     }
 }

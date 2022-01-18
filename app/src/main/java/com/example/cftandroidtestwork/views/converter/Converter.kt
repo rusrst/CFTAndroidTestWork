@@ -11,13 +11,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.cftandroidtestwork.data.contract.HasCustomTitle
+import com.example.cftandroidtestwork.data.contract.Navigator
 import com.example.cftandroidtestwork.data.json.Valute
 import com.example.cftandroidtestwork.databinding.ConverterBinding
 import com.example.cftandroidtestwork.views.currencylist.CurrencyViewModel
 
 
 val charArray = listOf('-', ' ')
-class Converter: Fragment(){
+class Converter: Fragment(), HasCustomTitle{
 
     var adapter: ArrayAdapter<String>? = null
     private val viewModel: CurrencyViewModel by activityViewModels()
@@ -40,6 +42,7 @@ class Converter: Fragment(){
         binding.spinnerVal.setSelection(viewModel.position)
         viewModel.data.observe(viewLifecycleOwner){ currentcurrencywithlistvalueandname ->
             if (currentcurrencywithlistvalueandname == null || currentcurrencywithlistvalueandname.valutes == null){
+                (requireActivity() as Navigator).updateUi(0)
                 viewModel.listNamed.clear()
                 adapter?.notifyDataSetChanged()
                 binding.spinnerVal.adapter = adapter
@@ -51,6 +54,7 @@ class Converter: Fragment(){
                 binding.textViewReload.visibility = View.GONE
             }
             else{
+                (requireActivity() as Navigator).updateUi(0)
                 binding.errorConverter.visibility = View.GONE
                 binding.numRub.visibility = View.VISIBLE
                 binding.textViewRub.visibility = View.VISIBLE
@@ -121,5 +125,14 @@ class Converter: Fragment(){
         }
         override fun onNothingSelected(p0: AdapterView<*>?) {
         }
+    }
+    override fun onResume() {
+        (requireActivity() as Navigator).updateUi(1)
+        super.onResume()
+    }
+
+    override fun getTitle(): String {
+        if (viewModel.data.value?.Date != null)  return viewModel.data.value?.Date!!
+        return "Данные пока не загружены"
     }
 }
