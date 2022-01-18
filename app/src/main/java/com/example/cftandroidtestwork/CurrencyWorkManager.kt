@@ -14,9 +14,9 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.lang.Exception
 
-class CurrencyWorkManager(private val context: Context, params: WorkerParameters,private var url: String): Worker(context, params) {
+class CurrencyWorkManager(private val context: Context, params: WorkerParameters): Worker(context, params) {
     override fun doWork(): Result {
-        Log.d("TAG", "TAG")
+         var url = "https://www.cbr-xml-daily.ru/daily_json.js"
         CurrencyInternetRepository.initialize()
         RoomRepository.initialize(context)
         val currencyInternetRepository = CurrencyInternetRepository.get()

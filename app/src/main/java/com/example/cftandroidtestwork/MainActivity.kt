@@ -32,12 +32,11 @@ class MainActivity : AppCompatActivity(), Navigator {
             tab.text = tabsArray[position]
         }.attach()
         if (!isWorkSchedule("myWork")) {
-            Log.d("TAG", "ЗАДАЧА СОЗДАНА")
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
             val work = PeriodicWorkRequest
-                .Builder(CurrencyWorkManager::class.java, 15, TimeUnit.MINUTES)
+                .Builder(CurrencyWorkManager::class.java, 4, TimeUnit.HOURS)
                 .addTag("myWork")
                 .setConstraints(constraints)
                 .build()
