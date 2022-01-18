@@ -57,9 +57,7 @@ class MainActivity : AppCompatActivity(), Navigator {
         val workInfoList = statuses.get()
         for (workInfo in workInfoList){
             val state = workInfo.state
-            running = (state == WorkInfo.State.RUNNING || state == WorkInfo.State.ENQUEUED ||
-                    state == WorkInfo.State.FAILED|| state == WorkInfo.State.BLOCKED
-                    || state == WorkInfo.State.CANCELLED || state == WorkInfo.State.SUCCEEDED)
+            running = (state == WorkInfo.State.RUNNING || state == WorkInfo.State.ENQUEUED)
         if (running) return true
         }
         return running
