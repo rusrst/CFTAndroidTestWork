@@ -13,7 +13,9 @@ class CurrencyViewModel: ViewModel() {
     override fun onCleared() {
         super.onCleared()
         workerThread?.quit()
+        workerThread = null
     }
     var currentVal: Valute? = null
     var position: Int = 0
-    val listNamed= mutableListOf<String>()}
+    val listNamed= mutableListOf<String>()
+}

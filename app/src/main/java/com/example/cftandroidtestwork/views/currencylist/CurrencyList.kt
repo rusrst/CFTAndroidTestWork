@@ -70,6 +70,7 @@ class CurrencyList: Fragment(), HasCustomTitle {
         }
         GlobalState.get().data.observe(viewLifecycleOwner){
             if (it){
+                GlobalState.get().data.value = false
                 viewModel.data.value = null
                 viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 0)
             }
