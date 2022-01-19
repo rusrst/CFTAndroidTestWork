@@ -17,13 +17,13 @@ import java.lang.Exception
 
 class CurrencyWorkManager(private val context: Context, params: WorkerParameters): Worker(context, params) {
     override fun doWork(): Result {
-         var url = "https://www.cbr-xml-daily.ru/daily_json.js"
+        val url = inputData.getString("url") ?: ""
         CurrencyInternetRepository.initialize()
         RoomRepository.initialize(context)
         val currencyInternetRepository = CurrencyInternetRepository.get()
         val roomRepository = RoomRepository.get()
-        var data = ""
-        var temp = CurrentCurrency()
+        val data: String
+        val temp: CurrentCurrency
         try {
             data = currencyInternetRepository.getRequestFromUrl(url)
         }
@@ -44,9 +44,9 @@ class CurrencyWorkManager(private val context: Context, params: WorkerParameters
                 PreviousURL = temp.PreviousURL
                 Timestamp = temp.Timestamp
                 valutes = mutableListOf()
-                val strings = temp.valutes?.keys
-                strings?.forEach {
-                    (valutes as MutableList<ValuteAndName>).add(ValuteAndName(it, temp.valutes!![it]!!))
+                val strings = temp.valutes.keys
+                strings.forEach {
+                    (valutes as MutableList<ValuteAndName>).add(ValuteAndName(it, temp.valutes[it]!!))
                 }
             }
         }

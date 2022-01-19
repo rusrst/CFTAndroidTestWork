@@ -1,5 +1,6 @@
 package com.example.cftandroidtestwork
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -35,10 +36,17 @@ class MainActivity : AppCompatActivity(), Navigator {
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
+            val data = Data.Builder()
+            data.putString("url", "https://www.cbr-xml-daily.ru/daily_json.js")
             val work = PeriodicWorkRequest
                 .Builder(CurrencyWorkManager::class.java, 4, TimeUnit.HOURS)
                 .addTag("myWork")
                 .setConstraints(constraints)
+                .setInputData(data.build())
+                .apply {
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                        this.setInitialDelay(10, TimeUnit.SECONDS)
+                }
                 .build()
             WorkManager.getInstance(this.applicationContext)
                 .enqueueUniquePeriodicWork("myWork", ExistingPeriodicWorkPolicy.REPLACE, work)
