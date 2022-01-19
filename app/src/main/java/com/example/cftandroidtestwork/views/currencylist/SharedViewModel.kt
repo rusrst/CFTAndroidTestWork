@@ -7,7 +7,7 @@ import com.example.cftandroidtestwork.WorkerThread
 import com.example.cftandroidtestwork.data.json.CurrentCurrencyWithListValuteAndName
 import com.example.cftandroidtestwork.data.json.Valute
 
-class CurrencyViewModel: ViewModel() {
+class SharedViewModel: ViewModel() {
     val data = MutableLiveData<CurrentCurrencyWithListValuteAndName?>()
     var workerThread: WorkerThread? = null
     override fun onCleared() {

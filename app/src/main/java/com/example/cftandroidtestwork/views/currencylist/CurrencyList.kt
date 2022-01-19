@@ -13,10 +13,13 @@ import com.example.cftandroidtestwork.data.contract.HasCustomTitle
 import com.example.cftandroidtestwork.data.contract.Navigator
 import com.example.cftandroidtestwork.databinding.CurrencyListBinding
 
+
+private const val MESSAGE_DOWNLOAD = 0
+private const val MESSAGE_DOWNLOAD_FROM_INTERNET = 1
 class CurrencyList: Fragment(), HasCustomTitle {
     private lateinit var adapter: CurrencyListAdapter
     private lateinit var binding: CurrencyListBinding
-    private val viewModel: CurrencyViewModel by activityViewModels()
+    private val viewModel: SharedViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,7 +32,7 @@ class CurrencyList: Fragment(), HasCustomTitle {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (viewModel.data.value == null){
             binding.progressBarCurrencyList.visibility = View.VISIBLE
-            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 0)
+            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", MESSAGE_DOWNLOAD)
         }
         adapter = CurrencyListAdapter()
         val layoutManager = LinearLayoutManager(requireContext())
@@ -59,20 +62,20 @@ class CurrencyList: Fragment(), HasCustomTitle {
         }
         binding.tryAgainCurrencyList.setOnClickListener{
             viewModel.data.value = null
-            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 0)
+            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", MESSAGE_DOWNLOAD)
         }
         binding.reloadButton.setOnClickListener{
             viewModel.data.value = null
-            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 1)
+            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", MESSAGE_DOWNLOAD_FROM_INTERNET)
         }
         binding.swipeToRefresh.setOnRefreshListener {
-            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 1)
+            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", MESSAGE_DOWNLOAD_FROM_INTERNET)
         }
         GlobalState.get().data.observe(viewLifecycleOwner){
             if (it){
                 GlobalState.get().data.value = false
                 viewModel.data.value = null
-                viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 0)
+                viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", MESSAGE_DOWNLOAD)
             }
         }
     }

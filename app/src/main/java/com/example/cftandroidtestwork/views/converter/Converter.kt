@@ -14,14 +14,14 @@ import androidx.fragment.app.activityViewModels
 import com.example.cftandroidtestwork.data.contract.HasCustomTitle
 import com.example.cftandroidtestwork.data.contract.Navigator
 import com.example.cftandroidtestwork.databinding.ConverterBinding
-import com.example.cftandroidtestwork.views.currencylist.CurrencyViewModel
+import com.example.cftandroidtestwork.views.currencylist.SharedViewModel
 
 
 val charArray = listOf('-', ' ')
 class Converter: Fragment(), HasCustomTitle{
 
     var adapter: ArrayAdapter<String>? = null
-    private val viewModel: CurrencyViewModel by activityViewModels()
+    private val viewModel: SharedViewModel by activityViewModels()
     private lateinit var binding: ConverterBinding
     override fun onCreateView(
         inflater: LayoutInflater,
