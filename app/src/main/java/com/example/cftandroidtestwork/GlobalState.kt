@@ -1,6 +1,5 @@
 package com.example.cftandroidtestwork
 import androidx.lifecycle.MutableLiveData
-import com.example.cftandroidtestwork.data.internet.CurrencyInternetRepository
 
 
 class GlobalState {

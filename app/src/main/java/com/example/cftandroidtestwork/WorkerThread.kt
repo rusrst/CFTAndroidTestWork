@@ -4,7 +4,6 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
 import android.os.Message
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.cftandroidtestwork.data.database.RoomRepository
 import com.example.cftandroidtestwork.data.database.entity.CurrencyRoomItem

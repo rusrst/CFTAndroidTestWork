@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.cftandroidtestwork.data.contract.HasCustomTitle
 import com.example.cftandroidtestwork.data.contract.Navigator
-import com.example.cftandroidtestwork.data.json.Valute
 import com.example.cftandroidtestwork.databinding.ConverterBinding
 import com.example.cftandroidtestwork.views.currencylist.CurrencyViewModel
 

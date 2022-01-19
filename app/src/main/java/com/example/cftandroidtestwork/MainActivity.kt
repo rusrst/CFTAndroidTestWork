@@ -3,7 +3,6 @@ package com.example.cftandroidtestwork
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.work.*
 import com.example.cftandroidtestwork.data.contract.HasCustomTitle
 import com.example.cftandroidtestwork.data.contract.Navigator

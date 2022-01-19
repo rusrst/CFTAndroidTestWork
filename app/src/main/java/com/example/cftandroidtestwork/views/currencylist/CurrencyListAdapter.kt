@@ -25,13 +25,20 @@ class CurrencyListAdapter: RecyclerView.Adapter<CurrencyListAdapter.CurrencyList
         val currentItem = items[position]
 
         holder.binding.run {
-            itemId.text = "ID = " + currentItem.valute.id
-            numCode.text = "Числовой код = " + currentItem.valute.numCode
-            charCode.text ="Буквенный код = " +  currentItem.valute.charCode
-            nominal.text = "Номинал = " + currentItem.valute.nominal.toString()
-            name.text = "Название валюты " + currentItem.valute.name
-            value.text = "Стоимость на сейчас = " + currentItem.valute.value.toString()
-            previous.text = "Предыдущая стоимость = " + currentItem.valute.previous.toString()
+            var str = "ID = " + currentItem.valute.id
+            itemId.text = str
+            str = "Числовой код = " + currentItem.valute.numCode
+            numCode.text = str
+            str = "Буквенный код = " +  currentItem.valute.charCode
+            charCode.text = str
+            str = "Номинал = " + currentItem.valute.nominal.toString()
+            nominal.text = str
+            str = "Название валюты " + currentItem.valute.name
+            name.text = str
+            str = "Стоимость на сейчас = " + currentItem.valute.value.toString()
+            value.text = str
+            str = "Предыдущая стоимость = " + currentItem.valute.previous.toString()
+            previous.text = str
         }
     }
 

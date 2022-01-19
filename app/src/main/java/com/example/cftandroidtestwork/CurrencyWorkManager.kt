@@ -1,7 +1,6 @@
 package com.example.cftandroidtestwork
 
 import android.content.Context
-import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.cftandroidtestwork.data.database.RoomRepository
@@ -10,7 +9,6 @@ import com.example.cftandroidtestwork.data.internet.CurrencyInternetRepository
 import com.example.cftandroidtestwork.data.json.CurrentCurrency
 import com.example.cftandroidtestwork.data.json.CurrentCurrencyWithListValuteAndName
 import com.example.cftandroidtestwork.data.json.ValuteAndName
-import kotlinx.coroutines.delay
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.lang.Exception
