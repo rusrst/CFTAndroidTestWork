@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cftandroidtestwork.GlobalState
 import com.example.cftandroidtestwork.WorkerThread
 import com.example.cftandroidtestwork.data.contract.HasCustomTitle
 import com.example.cftandroidtestwork.data.contract.Navigator
@@ -67,6 +68,12 @@ class CurrencyList: Fragment(), HasCustomTitle {
         }
         binding.swipeToRefresh.setOnRefreshListener {
             viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 1)
+        }
+        GlobalState.get().data.observe(viewLifecycleOwner){
+            if (it){
+                viewModel.data.value = null
+                viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 0)
+            }
         }
     }
 

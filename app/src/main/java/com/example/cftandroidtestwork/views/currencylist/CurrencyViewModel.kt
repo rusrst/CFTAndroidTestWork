@@ -1,11 +1,9 @@
 package com.example.cftandroidtestwork.views.currencylist
 
-import android.widget.ArrayAdapter
-import androidx.lifecycle.LiveData
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cftandroidtestwork.WorkerThread
-import com.example.cftandroidtestwork.data.json.CurrentCurrency
 import com.example.cftandroidtestwork.data.json.CurrentCurrencyWithListValuteAndName
 import com.example.cftandroidtestwork.data.json.Valute
 

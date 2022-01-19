@@ -55,7 +55,7 @@ class CurrencyWorkManager(private val context: Context, params: WorkerParameters
         }
         val saveResult = CurrencyRoomItem()
         saveResult.apply {
-            Date = java.sql.Date(System.currentTimeMillis()).toString()
+            Date = result.Date
             PreviousDate = result.PreviousDate
             PreviousURL = result.PreviousURL
             Timestamp = result.Timestamp
@@ -64,6 +64,10 @@ class CurrencyWorkManager(private val context: Context, params: WorkerParameters
         if (saveResult.valutes != null){
             roomRepository.setItem(saveResult)
         }
+        try {
+            GlobalState.get().data.postValue(true)
+        }
+        catch (e:Exception){}
         return Result.success()
     }
 }
