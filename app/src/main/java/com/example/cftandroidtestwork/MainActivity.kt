@@ -10,11 +10,13 @@ import com.example.cftandroidtestwork.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.concurrent.TimeUnit
 
-
+private const val CHANNEL_ID = "My_notification"
 val tabsArray = listOf("Валюты", "Конвертер")
 class MainActivity : AppCompatActivity(), Navigator {
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        GlobalState.initialize()
+        Notification().createChannel(CHANNEL_ID, getString(com.example.cftandroidtestwork.R.string.channel_notification_all), this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root

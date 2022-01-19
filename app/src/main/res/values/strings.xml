@@ -4,4 +4,5 @@
     <string name="try_again">TRY AGAIN</string>
     <string name="errorNoData">ERROR, Данные отсутствуют</string>
     <string name="rub">RUB</string>
+    <string name="channel_notification_all">Уведомления об обновлениях</string>
 </resources>

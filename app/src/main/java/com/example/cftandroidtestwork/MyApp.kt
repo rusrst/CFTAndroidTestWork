@@ -8,7 +8,6 @@ class MyApp: Application() {
     override fun onCreate() {
         CurrencyInternetRepository.initialize()
         RoomRepository.initialize(this)
-        GlobalState.initialize()
         super.onCreate()
     }
 }

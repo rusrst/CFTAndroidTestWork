@@ -13,6 +13,9 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.lang.Exception
 
+
+private const val CHANNEL_ID = "My_notification"
+
 class CurrencyWorkManager(private val context: Context, params: WorkerParameters): Worker(context, params) {
     override fun doWork(): Result {
         val url = inputData.getString("url") ?: ""
@@ -65,7 +68,10 @@ class CurrencyWorkManager(private val context: Context, params: WorkerParameters
         try {
             GlobalState.get().data.postValue(true)
         }
-        catch (e:Exception){}
+        catch (e:Exception){
+            Notification().sendNotification(context, CHANNEL_ID, R.drawable.ic_baseline_cached_24,
+                "Данные обновлены", "в фоновом режиме", 2)
+        }
         return Result.success()
     }
 }
