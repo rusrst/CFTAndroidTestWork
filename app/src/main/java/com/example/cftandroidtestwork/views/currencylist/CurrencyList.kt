@@ -36,6 +36,7 @@ class CurrencyList: Fragment(), HasCustomTitle {
         binding.recyclerViewCurrencyList.layoutManager = layoutManager
         binding.recyclerViewCurrencyList.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner){
+            binding.swipeToRefresh.isRefreshing = false
             if (it?.Date != null) {
                 (requireActivity() as Navigator).updateUi(0)
                 binding.progressBarCurrencyList.visibility = View.GONE
@@ -62,6 +63,9 @@ class CurrencyList: Fragment(), HasCustomTitle {
         }
         binding.reloadButton.setOnClickListener{
             viewModel.data.value = null
+            viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 1)
+        }
+        binding.swipeToRefresh.setOnRefreshListener {
             viewModel.workerThread?.returnData("https://www.cbr-xml-daily.ru/daily_json.js", 1)
         }
     }

@@ -1,0 +1,64 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "3279c6b74c1d73e3344d94ddfa313395",
+    "entities": [
+      {
+        "tableName": "CurrencyRoomItem",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `Date` TEXT, `PreviousDate` TEXT, `PreviousURL` TEXT, `Timestamp` TEXT, `valutes` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Date",
+            "columnName": "Date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PreviousDate",
+            "columnName": "PreviousDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PreviousURL",
+            "columnName": "PreviousURL",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Timestamp",
+            "columnName": "Timestamp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valutes",
+            "columnName": "valutes",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3279c6b74c1d73e3344d94ddfa313395')"
+    ]
+  }
+}
