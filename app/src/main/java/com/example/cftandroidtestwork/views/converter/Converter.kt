@@ -17,7 +17,7 @@ import com.example.cftandroidtestwork.databinding.ConverterBinding
 import com.example.cftandroidtestwork.views.currencylist.SharedViewModel
 
 
-val charArray = listOf('-', ' ')
+val charArray = listOf('0', '1', '2', '3', '4', '5', '6','7', '8', '9', ',', '.' )
 class Converter: Fragment(), HasCustomTitle{
 
     var adapter: ArrayAdapter<String>? = null
@@ -66,7 +66,8 @@ class Converter: Fragment(), HasCustomTitle{
                 }
                 adapter?.notifyDataSetChanged()
                 binding.textViewReload.visibility = View.VISIBLE
-                binding.textViewReload.text = "Данные от: " +  viewModel.data.value?.Date
+                val str = "Данные от: " +  viewModel.data.value?.Date
+                binding.textViewReload.text = str
                 binding.multiplier.visibility = View.VISIBLE
             }
         }
@@ -88,7 +89,7 @@ class Converter: Fragment(), HasCustomTitle{
             else{
                 var count = 0
                 p0?.forEach {
-                    if(it in charArray){
+                    if(it !in charArray){
                         binding.numRub.text = SpannableStringBuilder("0")
                         binding.numRub.setSelection(1)
                         return
@@ -102,7 +103,7 @@ class Converter: Fragment(), HasCustomTitle{
                         binding.numRub.setSelection(1)
                         return
                     }
-                var multiplier: Double
+                val multiplier: Double
                 if (viewModel.currentVal == null || viewModel.currentVal?.value == null || viewModel.currentVal?.nominal == null) multiplier = 1.0
                 else multiplier = viewModel.currentVal?.value!! /viewModel.currentVal?.nominal!!
                 binding.multiplier.text = multiplier.toString()
