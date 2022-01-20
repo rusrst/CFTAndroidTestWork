@@ -25,7 +25,7 @@ class RoomRepository (context: Context){
     )
         .build()
     private val databaseDao = database.roomDao()
-    fun getItem() = databaseDao.getItem()
-    fun setItem(item: CurrencyRoomItem) = databaseDao.setData(item)
+    @Synchronized fun getItem() = databaseDao.getItem()
+    @Synchronized fun setItem(item: CurrencyRoomItem) = databaseDao.setData(item)
 }
 

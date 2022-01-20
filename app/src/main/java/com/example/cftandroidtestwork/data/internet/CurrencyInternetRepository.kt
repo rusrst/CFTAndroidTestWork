@@ -13,7 +13,7 @@ class CurrencyInternetRepository{
             .build()
         currencyApi = retrofit.create(CurrencyApi::class.java)
     }
-    fun getRequestFromUrl(url: String): String
+    @Synchronized fun getRequestFromUrl(url: String): String
     {
         val data: Call<String> = currencyApi.getData(url)
         val response = data.execute()
