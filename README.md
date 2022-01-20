@@ -10,5 +10,4 @@ HandlerThread как механизм асинхронного выполнен�
 WorkManager  
   
     
-Собранное приложение можно взять [здесь]
-(https://github.com/rusrst/CFTAndroidTestWork/tree/main/app/build/outputs/apk/debug)
+Собранное приложение можно взять [здесь](https://github.com/rusrst/CFTAndroidTestWork/tree/main/app/build/outputs/apk/debug)
