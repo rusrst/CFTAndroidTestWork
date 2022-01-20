@@ -7,4 +7,8 @@ RecyclerView
 Cotlinx Serializable  
 LiveData и ViewModels  
 HandlerThread как механизм асинхронного выполнения  
-WorkManager
+WorkManager  
+  
+    
+Собранное приложение можно взять [здесь]
+(https://github.com/rusrst/CFTAndroidTestWork/tree/main/app/build/outputs/apk/debug)
