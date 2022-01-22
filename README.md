@@ -9,8 +9,6 @@ LiveData и ViewModels
 HandlerThread как механизм асинхронного выполнения  
 WorkManager  
   
-    
-Собранное приложение можно взять [здесь](https://github.com/rusrst/CFTAndroidTestWork/tree/main/app/build/outputs/apk/debug)
 
 Выглядит приложение так
 ![alt text](https://github.com/rusrst/CFTAndroidTestWork/blob/main/Image/Screenshot_2022-01-20-23-50-24-35.jpg)
